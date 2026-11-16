@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#14213d">
+    <title>Study Buddy AI — Dashboard</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body class="study-dashboard">
+
+<div class="dashboard-layout">
+
+    <!-- Sidebar -->
+    <aside class="app-sidebar" id="appSidebar">
+        <a class="sidebar-brand" href="/dashboard.html">
+            <span class="brand-icon">📚</span>
+            <span class="brand-copy">
+                <strong>Study Buddy</strong>
+                <small>Your learning space</small>
+            </span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+
+        <nav class="sidebar-nav" aria-label="Main navigation">
+            <a class="sidebar-link active" href="/dashboard.html"
+               aria-current="page">
+                <span class="nav-icon">⌂</span>
+                <span>Dashboard</span>
+            </a>
+            <a class="sidebar-link" href="/planner.html">
+                <span class="nav-icon">✧</span>
+                <span>Study Planner</span>
+            </a>
+            <a class="sidebar-link" href="/notes.html">
+                <span class="nav-icon">▤</span>
+                <span>Notes</span>
+            </a>
+            <a class="sidebar-link" href="/my%20notes.html">
+                <span class="nav-icon">▣</span>
+                <span>My Notes</span>
+            </a>
+            <a class="sidebar-link" href="/quiz.html">
+                <span class="nav-icon">◈</span>
+                <span>Quiz</span>
+            </a>
+            <a class="sidebar-link" href="/time%20table.html">
+                <span class="nav-icon">▦</span>
+                <span>Timetable</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-label sidebar-label-lower">YOUR PROGRESS</div>
+
+        <a class="sidebar-link" href="#mlAnalysisBox"
+           onclick="if(typeof loadMLAnalysis==='function'){loadMLAnalysis();}">
+            <span class="nav-icon">◔</span>
+            <span>AI Analysis</span>
+        </a>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-tip">
+                <span class="tip-icon">💡</span>
+                <strong>Small steps matter</strong>
+                <p>Stay consistent. Your progress adds up every day.</p>
+            </div>
+
+            <a class="sidebar-link" href="/profile">
+                <span class="nav-icon">⚙</span>
+                <span>Profile & Settings</span>
+            </a>
+
+            <!-- Change this destination if your server uses another logout route. -->
+            <a class="sidebar-link logout-link" href="/logout">
+                <span class="nav-icon">↪</span>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Mobile overlay -->
+    <button type="button" class="sidebar-overlay"
+            id="sidebarOverlay" aria-label="Close navigation"
+            onclick="closeDashboardSidebar()"></button>
+
+    <!-- Main area -->
+    <div class="dashboard-main">
+
+        <!-- Top navigation -->
+        <header class="dashboard-topbar">
+            <div class="topbar-left">
+                <button type="button" class="icon-button sidebar-toggle"
+                        onclick="toggleDashboardSidebar()"
+                        aria-label="Toggle sidebar"
+                        aria-controls="appSidebar">
+                    ☰
+                </button>
+
+                <div class="breadcrumb">
+                    <span>Workspace</span>
+                    <span class="breadcrumb-separator">/</span>
+                    <strong>Dashboard</strong>
+                </div>
+            </div>
+
+            <div class="topbar-right">
+                <span class="topbar-date">✦ Keep learning</span>
+
+                <a href="/profile" class="profile-shortcut"
+                   aria-label="Open profile">
+                    <span class="profile-avatar">👤</span>
+                    <span class="profile-shortcut-copy">
+                        <strong id="topbarUserName">Student</strong>
+                        <small>My account</small>
+                    </span>
+                    <span class="profile-chevron">⌄</span>
+                </a>
+            </div>
+        </header>
+
+        <main class="container dashboard-content">
+
+            <!-- Welcome -->
+            <section class="dashboard-welcome">
+                <div class="welcome-copy">
+                    <span class="welcome-eyebrow">YOUR PERSONAL STUDY SPACE</span>
+<h1>
+    <span id="dashboardGreetingText">Welcome back,</span>
+    <span id="dashboardGreetingName">Student</span> 👋
+</h1>
+                    <p>Stay focused, keep learning, and make today count.</p>
+                </div>
+                <div class="welcome-decoration" aria-hidden="true">🎓</div>
+            </section>
+
+            <section class="motivation">
+                <h2>🚀 Stay consistent. Small steps daily.</h2>
+                <p>Build your focus, one session at a time.</p>
+            </section>
+
+            <section class="card center dashboard-user-card">
+                <h3 id="userName">Student</h3>
+                <p>Choose what you want to do today.</p>
+            </section>
+
+            <!-- Today's plan popup -->
+            <div id="todayPlanPopup"
+                 role="dialog" aria-modal="true"
+                 aria-labelledby="todayPlanPopupTitle"
+                 style="display:none; position:fixed; inset:0; z-index:9999;
+                 background:rgba(0,0,0,.62); padding:20px;
+                 align-items:center; justify-content:center;">
+                <div class="today-popup-inner">
+                    <div class="today-popup-header">
+                        <h2 id="todayPlanPopupTitle">📚 Today's Study Plan</h2>
+                        <button type="button" onclick="closeTodayPlanPopup()"
+                                aria-label="Close today's plan">✕</button>
+                    </div>
+                    <p>Here's your plan for today. Let's get started!</p>
+                    <div id="todayPlanBox"></div>
+                    <button type="button" onclick="closeTodayPlanPopup()">
+                        Let's Study!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Study timer -->
+            <section class="card center dashboard-timer-card"
+                     id="dashboardStudyTimerCard">
+                <div class="section-eyebrow">FOCUS SESSION</div>
+                <h2>⏱️ Today's Study Time</h2>
+                <p id="dashboardTimerSubject">📘 General Study</p>
+                <h1 id="dashboardStudyTimer">00:00:00</h1>
+                <p id="dashboardTimerStatus">🟢 Study session is running</p>
+                <div class="timer-actions">
+                    <button id="dashboardPauseTimerBtn" type="button">
+                        ⏸️ Pause
+                    </button>
+                    <button id="dashboardFinishTimerBtn" type="button">
+                        ✅ Finish Session
+                    </button>
+                </div>
+            </section>
+
+            <!-- Study features -->
+            <div class="section-heading">
+                <div>
+                    <span class="section-eyebrow">GET THINGS DONE</span>
+                    <h2>Your study tools</h2>
+                </div>
+            </div>
+
+            <section class="grid dashboard-feature-grid"
+                     aria-label="Study features">
+                <a href="/planner.html">
+                    <div class="grid-card">
+                        <span class="feature-icon feature-blue">✧</span>
+                        Planner
+                        <small>Create an AI study plan</small>
+                    </div>
+                </a>
+                <a href="/notes.html">
+                    <div class="grid-card">
+                        <span class="feature-icon feature-purple">▤</span>
+                        Notes
+                        <small>Read smart notes</small>
+                    </div>
+                </a>
+                <a href="/quiz.html">
+                    <div class="grid-card">
+                        <span class="feature-icon feature-green">◈</span>
+                        Quiz
+                        <small>Test your knowledge</small>
+                    </div>
+                </a>
+                <a href="/time%20table.html">
+                    <div class="grid-card">
+                        <span class="feature-icon feature-orange">▦</span>
+                        Timetable
+                        <small>Organize your study time</small>
+                    </div>
+                </a>
+                <a href="/my%20notes.html">
+                    <div class="grid-card">
+                        <span class="feature-icon feature-pink">▣</span>
+                        My Notes
+                        <small>Manage your study materials</small>
+                    </div>
+                </a>
+                <a href="#mlAnalysisBox"
+                   onclick="if(typeof loadMLAnalysis==='function'){loadMLAnalysis();}">
+                    <div class="grid-card">
+                        <span class="feature-icon feature-purple">◔</span>
+                        AI Analysis
+                        <small>Explore your learning progress</small>
+                    </div>
+                </a>
+            </section>
+
+            <!-- Tasks -->
+            <section class="card dashboard-section-card">
+                <div class="card-header">
+                    <div>
+                        <span class="section-eyebrow">STAY ON TRACK</span>
+                        <h3>📋 Study Task Checklist</h3>
+                    </div>
+                    <small>Synced with your database</small>
+                </div>
+
+                <div class="task-entry-row">
+                    <input id="taskSubject" aria-label="Task subject"
+                           placeholder="Subject (e.g. Maths, Physics)">
+                    <input id="taskInput" aria-label="Task details"
+                           placeholder="Task detail (e.g. Complete chapter 4)">
+                    <button type="button" onclick="addTask()">＋ Add Task</button>
+                </div>
+                <div id="taskList"></div>
+            </section>
+
+            <!-- Analytics -->
+            <section id="mlAnalysisBox" class="card dashboard-section-card"
+                     style="margin-top:20px;display:none;">
+                <div class="card-header">
+                    <div>
+                        <span class="section-eyebrow">YOUR LEARNING INSIGHTS</span>
+                        <h3>🤖 My AI Learning Analysis</h3>
+                    </div>
+                </div>
+                <p>Track your quiz performance, study hours and task completion.</p>
+                <div id="mlAnalysisContent" style="margin-top:15px;">
+                    ⏳ Analyzing your learning...
+                </div>
+                <div id="studentPerformanceChart" style="margin-top:24px;">
+                    <h3>📊 Student Performance Chart</h3>
+                    <p>Performance by subject</p>
+                    <div id="performanceChartContent"></div>
+                </div>
+            </section>
+
+            <footer class="dashboard-footer">
+                Made for your next step forward. <span>📚</span>
+            </footer>
+
+        </main>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    function toggleDashboardSidebar() {
+        if (window.matchMedia("(max-width: 800px)").matches) {
+            document.body.classList.toggle("sidebar-open");
+        } else {
+            document.body.classList.toggle("sidebar-collapsed");
+        }
+    }
+
+    function closeDashboardSidebar() {
+        document.body.classList.remove("sidebar-open");
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        if (typeof loadTasks === "function") loadTasks();
+        if (typeof loadProfile === "function") loadProfile();
+
+        const userName = document.getElementById("userName");
+        const greetingName = document.getElementById("dashboardGreetingName");
+        const topbarName = document.getElementById("topbarUserName");
+
+        function syncNames() {
+            const name = userName?.textContent?.trim();
+            if (name && name !== "Student") {
+                if (greetingName) greetingName.textContent = name;
+                if (topbarName) topbarName.textContent = name;
+            }
+        }
+
+        syncNames();
+        if (userName) {
+            new MutationObserver(syncNames).observe(userName, {
+                childList: true,
+                subtree: true,
+                characterData: true
+            });
+        }
+
+        document.querySelectorAll(".sidebar-link").forEach(link => {
+            if (link.getAttribute("href") === location.pathname) {
+                document.querySelectorAll(".sidebar-link").forEach(item => {
+                    item.classList.remove("active");
+                    item.removeAttribute("aria-current");
+                });
+                link.classList.add("active");
+                link.setAttribute("aria-current", "page");
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") closeDashboardSidebar();
+        });
+    });
+</script>
+</body>
+</html>
+    

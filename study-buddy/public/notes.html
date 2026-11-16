@@ -1,0 +1,189 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Notes | Study Buddy</title>
+    <link rel="stylesheet" href="app.css">
+
+    </head>
+
+<body>
+    <main class="notes-page">
+
+        <!-- Navigation -->
+        <header class="notes-topbar">
+            <a class="notes-brand" href="/dashboard" aria-label="Study Buddy dashboard">
+                <span class="notes-brand-icon">📚</span>
+                <span>Study Buddy</span>
+            </a>
+
+            <nav class="notes-nav" aria-label="Main navigation">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/planner.html">Planner</a>
+                <a href="/todays%20plan.html">Today's Plan</a>
+                <a href="/quiz.html">Quiz</a>
+                <a href="/notes.html" class="active" aria-current="page">My Notes</a>
+            </nav>
+        </header>
+
+        <!-- Introduction -->
+        <section class="notes-intro">
+            <div>
+                <div class="notes-eyebrow">YOUR PERSONAL STUDY SPACE</div>
+                <h1>My Notes<span style="color:#6878f0">.</span></h1>
+                <p>
+                    Turn difficult topics into clear revision notes.
+                    Write your own ideas, save important concepts, and keep
+                    your study material together in one place.
+                </p>
+            </div>
+
+            <button
+    type="button"
+    class="notes-back"
+    onclick="goBack()">
+    ← Back
+</button>
+        </section>
+
+        <!-- Main workspace -->
+        <section class="notes-layout">
+
+            <!-- AI note generator -->
+            <article class="notes-panel">
+                <div class="notes-panel-heading">
+                    <div class="notes-panel-icon">✨</div>
+                    <div>
+                        <h2>AI Notes Generator</h2>
+                        <p>Generate structured notes for your next study session.</p>
+                    </div>
+                </div>
+
+                <label class="notes-label" for="customSubjectInput">
+                    Subject
+                </label>
+                <input
+                    id="customSubjectInput"
+                    type="text"
+                    placeholder="e.g. Physics, Java, DBMS"
+                    autocomplete="off">
+
+                <label class="notes-label" for="customTopicInput">
+                    Topic you want to learn
+                </label>
+                <input
+                    id="customTopicInput"
+                    type="text"
+                    placeholder="e.g. Newton's Laws, Normalization"
+                    autocomplete="off">
+
+                <button
+                    type="button"
+                    class="notes-generate"
+                    onclick="generateCustomNotes()">
+                    ✨ Generate Study Notes
+                </button>
+
+                <div class="notes-result">
+                    <div class="notes-result-header">
+                        <h3>Generated Notes</h3>
+                        <span class="notes-ai-tag">AI POWERED</span>
+                    </div>
+
+                    <div id="notesBox" class="notes-box" aria-live="polite">
+                        Your generated notes will appear here. Enter a subject
+                        and topic above to get started.
+                    </div>
+
+                    <div class="notes-actions">
+                        <button
+                            type="button"
+                            class="notes-action"
+                            onclick="copyNotes()">
+                            📋 Copy Notes
+                        </button>
+
+                        <button
+                            type="button"
+                            class="notes-action primary"
+                            onclick="saveCurrentAINote()">
+                            💾 Save Generated Notes
+                        </button>
+                    </div>
+                </div>
+
+                <p class="notes-hint">
+                    Tip: Use a specific topic to get more focused revision notes.
+                </p>
+            </article>
+
+            <!-- Personal note editor -->
+            <article class="notes-panel">
+                <div class="notes-panel-heading">
+                    <div class="notes-panel-icon">✍️</div>
+                    <div>
+                        <h2>Personal Notes</h2>
+                        <p>Write down your own explanations, formulas, and reminders.</p>
+                    </div>
+                </div>
+
+                <label class="notes-label" for="noteText">
+                    Your study notes
+                </label>
+
+                <textarea
+                    id="noteText"
+                    style="min-height:290px"
+                    placeholder="Start writing here...
+
+• Important concepts
+• Formulas and definitions
+• Questions to revisit
+• Exam revision points"></textarea>
+
+                <button
+                    type="button"
+                    class="notes-generate"
+                    onclick="addNote()">
+                    💾 Save Personal Note
+                </button>
+
+                <div class="notes-divider"></div>
+
+                <p class="notes-hint">
+                    Keep your notes clear and organized. Save important points
+                    while studying so you can review them later.
+                </p>
+            </article>
+
+        </section>
+
+        <!-- Saved notes library -->
+        <section class="notes-panel notes-library">
+            <div class="notes-library-header">
+                <div class="notes-library-title">
+                    <div class="notes-library-icon">🗂️</div>
+                    <div>
+                        <h2>Saved Notes</h2>
+                        <p>Your notes saved to your Study Buddy account.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                id="notesList"
+                class="notes-library-content"
+                aria-live="polite">
+                <p class="sub">Loading your saved notes...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Keep the existing JavaScript and API integration -->
+    <script src="script.js"></script>
+</body>
+</html>

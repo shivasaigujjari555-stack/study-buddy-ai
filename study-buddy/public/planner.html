@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner - Study Buddy</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <button class="back-btn" onclick="window.location.href='/dashboard'">← Back</button>
+    <div class="logo">📅 Study Planner</div>
+    <div class="navbar-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/todays plan.html">Today's Plan</a>
+        <a href="/time table.html">Time Table</a>
+        <a href="/notes.html">Notes</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h1 class="page-title">📅 7-Day AI Study Planner</h1>
+
+    <!-- INPUT CARD -->
+    <div class="card" style="margin-bottom: 20px;">
+        <h3>What subjects do you want to master this week?</h3>
+        <p class="sub">Enter multiple subjects separated by commas (e.g. Mathematics, Python, Chemistry, Economics)</p>
+        <div style="display:flex; gap:10px;">
+            <input id="subjects" placeholder="e.g. Data Structures, Operating Systems, Machine Learning" style="margin-bottom:0;">
+            <button onclick="generatePlan()" style="white-space:nowrap;">🚀 Generate Plan</button>
+        </div>
+    </div>
+
+    <!-- PLAN OUTPUT -->
+    <div id="planOutput" class="grid" style="margin-bottom: 25px;"></div>
+
+    <!-- My Notes -->
+    <div class="card">
+        <h2>📝 My Notes</h2>
+        <p class="sub">Organize your study materials and take notes</p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:15px;">
+            <button onclick="summarizePlan()">📄 Summarize Plan</button>
+            <button onclick="generatePlanQuestions()">❓ Important Questions</button>
+            <button onclick="explainPlan()">💡 Explain Topics</button>
+        </div>
+
+        <div id="aiPlanOutput" class="notes-box" style="display:none;"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

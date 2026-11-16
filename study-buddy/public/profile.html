@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile - Study Buddy</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <button class="back-btn" onclick="window.location.href='/dashboard'">← Back</button>
+    <div class="logo">👤 Student Profile</div>
+    <div class="navbar-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/planner.html">Planner</a>
+        <a href="/todays plan.html">Today's Plan</a>
+    </div>
+</div>
+
+<div class="container" style="max-width: 800px;">
+
+    <!-- PROFILE TOP CARD -->
+    <div class="card center" style="margin-bottom: 25px;">
+        <div style="width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #0a84ff, #5e5ce6); color: white; display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 700; margin: 0 auto 15px;">
+            👤
+        </div>
+        <h2 id="userName" style="font-size: 26px;">Student</h2>
+        <p class="sub" id="userSubtext">Study Buddy Learner</p>
+    </div>
+
+    <!-- 📊 STATS -->
+    <h3 style="margin-bottom: 15px;">📊 Learning Milestones</h3>
+    <div class="grid" style="margin-bottom: 25px;">
+
+        <div class="card center">
+            <h1 id="hours" style="color:#0a84ff; font-size:38px;">0</h1>
+            <p style="font-weight:600; margin-top:5px;">Study Hours</p>
+            <small style="color:#64748b;">Logged in study sessions</small>
+        </div>
+
+        <div class="card center">
+            <h1 id="tasks" style="color:#34c759; font-size:38px;">0</h1>
+            <p style="font-weight:600; margin-top:5px;">Tasks & Quizzes</p>
+            <small style="color:#64748b;">Completed successfully</small>
+        </div>
+
+        <div class="card center">
+            <h1 id="streak" style="color:#ff9500; font-size:38px;">1</h1>
+            <p style="font-weight:600; margin-top:5px;">Day Streak</p>
+            <small style="color:#64748b;">Consistent activity</small>
+        </div>
+
+    </div>
+
+    <!-- ⚙️ PREFERENCES & SETTINGS -->
+    <div class="card" style="margin-bottom: 20px;">
+        <h3>⚙️ Account & Appearance</h3>
+        <p class="sub">Personalize your Study Buddy experience</p>
+
+        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:15px;">
+            <button onclick="openSettings()">✏️ Edit Profile / Password</button>
+            <button id="darkModeBtn" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
+            <button onclick="logout()" style="background:#ef4444;">🚪 Logout</button>
+        </div>
+    </div>
+
+    <!-- SETTINGS MODAL / EXPANDABLE -->
+    <div id="settingsBox" class="card" style="display:none; margin-top:20px;">
+        <h3>✏️ Update Profile Information</h3>
+        <p class="sub">Change your display name or password</p>
+
+        <label style="font-weight:600; font-size:13px; display:block; margin-bottom:5px;">Display Name</label>
+        <input id="settingNameInput" placeholder="Your Name">
+
+        <label style="font-weight:600; font-size:13px; display:block; margin-bottom:5px;">New Password (leave blank to keep current)</label>
+        <input id="settingPasswordInput" type="password" placeholder="New Password">
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+            <button onclick="saveSettings()">💾 Save Changes</button>
+            <button onclick="closeSettings()" style="background:transparent; color:inherit; border:1px solid #cbd5e1;">Cancel</button>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    applyStoredTheme();
+    loadProfile();
+});
+</script>
+
+</body>
+</html>

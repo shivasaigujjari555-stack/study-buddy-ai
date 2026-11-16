@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Notes - Study Buddy</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="navbar">
+    <button class="back-btn" onclick="window.location.href='/dashboard'">← Back</button>
+    <div class="logo">📝 My Notes</div>
+    <div class="navbar-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/planner.html">Planner</a>
+        <a href="/notes.html">Notes</a>
+        <a href="/quiz.html">Quiz</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h2 class="page-title">📝 My Notes</h2>
+
+    <div class="card" style="margin-bottom: 20px;">
+        <h3>Input Text, Notes, or Topics</h3>
+        <p class="sub">Paste lecture notes or type topics to summarize, generate questions, or get simple explanations</p>
+
+        <textarea id="assistInput" placeholder="Paste your study material, paragraph, or concepts here..."></textarea>
+
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
+            <button onclick="summarizeNotes()">📄 Summarize Text</button>
+            <button onclick="generateQuestions()">❓ Generate Questions</button>
+            <button onclick="explainTopic()">💡 Explain Simply</button>
+        </div>
+    </div>
+
+    <div id="aiOutput" class="card" style="display:none; margin-top:20px;">
+        <h3 id="aiOutputTitle">🤖 AI Response</h3>
+        <div id="aiOutputContent" class="notes-box" style="margin-top:12px;"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", applyStoredTheme);
+</script>
+</body>
+</html>

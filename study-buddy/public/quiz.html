@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Quiz - Study Buddy</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <button class="back-btn" onclick="goBack()">← Back</button>
+    <div class="logo">🧠 AI Quiz Center</div>
+    <div class="navbar-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/planner.html">Planner</a>
+        <a href="/todays plan.html">Today's Plan</a>
+        <a href="/notes.html">Notes</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h2 class="page-title">🧠 Smart Self-Assessment Quiz</h2>
+
+    <!-- TOPIC SELECTOR / SWITCHER -->
+    <div class="card" style="margin-bottom: 20px;">
+        <h3 id="quizTopicHeading">Take a Practice Quiz</h3>
+        <p class="sub">Test your knowledge with 5 intelligent questions tailored to your topic</p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+            <input id="customQuizSubject" placeholder="Subject (e.g. Physics, DBMS)" style="flex:1; min-width:180px; margin-bottom:0;">
+            <input id="customQuizTopic" placeholder="Topic (e.g. Newton's Laws, SQL Queries)" style="flex:2; min-width:220px; margin-bottom:0;">
+            <button onclick="startCustomQuiz()">⚡ Start Quiz</button>
+        </div>
+    </div>
+
+    <!-- TIMER & CONTROLS -->
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+        <div class="stat-card" style="padding:10px 20px; display:inline-flex; align-items:center; gap:8px;">
+            ⏱ <b>Time Left:</b> <span id="timer" style="color:#0a84ff; font-weight:700; font-size:18px;">60</span>s
+        </div>
+
+        <button onclick="loadQuiz()" style="background:transparent; color:inherit; border:1px solid rgba(15,23,42,0.15);">
+            🔄 Reload Questions
+        </button>
+    </div>
+
+    <!-- QUIZ BOX -->
+    <div id="quizBox" style="display:flex; flex-direction:column; gap:15px; margin-bottom: 20px;">
+        <div class="card center">
+            ⏳ Loading your practice quiz...
+        </div>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div class="center" style="margin-bottom: 20px;">
+        <button id="submitQuizBtn" onclick="submitQuiz()" style="padding:14px 32px; font-size:16px;">
+            ✅ Submit Quiz & Save to ML Profile
+        </button>
+    </div>
+
+    <!-- RESULT -->
+    <div id="quizResult"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

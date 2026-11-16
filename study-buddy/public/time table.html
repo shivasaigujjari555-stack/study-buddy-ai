@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Time Table - Study Buddy</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="navbar">
+    <button class="back-btn" onclick="window.location.href='/dashboard'">
+        ← Back
+    </button>
+
+    <div class="logo">⏰ AI Time Table</div>
+
+    <div class="navbar-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/planner.html">Planner</a>
+        <a href="#" onclick="openTodayPlanPopup(); return false;">Today's Plan</a>
+        <a href="/notes.html">Notes</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <h2 class="page-title">🗓️ AI Study Timetable</h2>
+
+    <div class="card" style="margin-bottom:20px;">
+        <h3>⚙️ Customize Your Study Timetable</h3>
+
+        <p class="sub">
+            Choose your timetable duration and subjects to create your study schedule.
+        </p>
+
+        <label for="timetableDuration"
+               style="display:block; margin-top:16px; font-weight:600;">
+            Timetable Duration
+        </label>
+
+        
+<select id="timetableDuration"
+        style="width:100%; margin-top:8px; padding:12px;">
+    <option value="1">1 day — Today's Plan</option>
+    <option value="7">7 days — 1 week</option>
+    <option value="14">14 days — 2 weeks</option>
+    <option value="21">21 days — 3 weeks</option>
+    <option value="30">30 days — 1 month</option>
+</select>
+
+
+        <label for="subjects"
+               style="display:block; margin-top:16px; font-weight:600;">
+            Your Subjects
+        </label>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
+            <input
+                id="subjects"
+                type="text"
+                placeholder="e.g. DSA, DBMS, Computer Networks"
+                style="flex:1; min-width:250px; margin-bottom:0;"
+            />
+
+            <button type="button" onclick="generateTimeTable()">
+                ⚡ Generate Timetable
+            </button>
+        </div>
+
+        <p style="font-size:13px; opacity:0.75; margin-top:12px;">
+            💡 Tip: Separate subjects with commas.
+        </p>
+    </div>
+
+    <div id="timetableStatus" role="status"
+         aria-live="polite" style="margin:12px 0;"></div>
+
+    <div id="timetableGrid" class="grid" style="margin-top:20px;"></div>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof applyStoredTheme === "function") {
+        applyStoredTheme();
+    }
+
+    if (typeof loadSavedTimeTable === "function") {
+        loadSavedTimeTable();
+    }
+});
+</script>
+
+</body>
+</html>
