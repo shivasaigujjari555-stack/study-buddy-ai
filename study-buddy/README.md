@@ -22,26 +22,20 @@ An AI-powered student productivity platform built to support study planning, not
 
 ## Project Structure
 
-```text
 study-buddy-ai/
-├── controllers/
-├── middleware/
-├── routes/
-├── public/
-├── ml_service/
-│   ├── data/models/
-│   ├── feature_engineering.py
-│   ├── main.py
-│   ├── train.py
-│   └── requirements.txt
-├── db.js
-├── server.js
-├── setup.sql
-├── package.json
-├── .env.example
-├── .gitignore
-└── Start Study Buddy.bat
-```
+└── study-buddy/
+    ├── controllers/
+    ├── middleware/
+    ├── ml_service/
+    ├── public/
+    ├── routes/
+    ├── .env.example
+    ├── README.md
+    ├── Start Study Buddy.bat
+    ├── db.js
+    ├── package.json
+    ├── server.js
+    └── setup.sql
 
 ## Requirements
 
