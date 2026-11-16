@@ -145,5 +145,16 @@ vite.config.ts.timestamp-*
 # Astro generated types
 .astro/
 
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Temporary ML files
+*.joblib
+
 # Turbo Repo
 .turbo
